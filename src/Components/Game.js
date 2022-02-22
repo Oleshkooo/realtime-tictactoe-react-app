@@ -48,6 +48,7 @@ export default function Game() {
     }
 
     const winner = () => {
+        const valuesRef = ref(db, `tictactoe/field0/background`)
         if (data) {
             // / X wins
             if (
@@ -63,10 +64,8 @@ export default function Game() {
                 (data[0].value === "X" && data[4].value === "X" && data[8].value === "X") ||
                 (data[2].value === "X" && data[4].value === "X" && data[6].value === "X")
             ) {
-                console.log("XXX")
-                const valuesRef = ref(db, `tictactoe/field0/background`)
+                // console.log("XXX")
                 set(valuesRef, "game-red")
-                console.log("Background - red")
                 setCounter(true)
                 clearAll()
             }
@@ -84,10 +83,8 @@ export default function Game() {
                 (data[0].value === "O" && data[4].value === "O" && data[8].value === "O") ||
                 (data[2].value === "O" && data[4].value === "O" && data[6].value === "O")
             ) {
-                console.log("OOO")
-                const valuesRef = ref(db, `tictactoe/field0/background`)
+                // console.log("OOO")
                 set(valuesRef, "game-blue")
-                console.log("Background - blue")
                 setCounter(false)
                 clearAll()
             }
