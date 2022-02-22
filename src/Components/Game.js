@@ -36,7 +36,8 @@ export default function Game() {
         if (!item.value) {
             if (counter) setXO("X", index)
             else setXO("O", index)
-            setCounter(!counter)
+            const counterRef = ref(db, `tictactoe/field0/counter`)
+            set(counterRef, !counter)
         }
         winner()
     }
