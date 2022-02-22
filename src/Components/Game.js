@@ -10,6 +10,8 @@ import db from '../Firebase'
 
 export default function Game() {
     const [data, setData] = useState([])
+    const [counter, setCounter] = useState(true)
+    const [background, setBackground] = useState()
     useEffect(() => {
         const dataRef = ref(db, 'tictactoe')
         onValue(dataRef, snapshot => {
@@ -19,12 +21,9 @@ export default function Game() {
                 arr.push(data[item]);
             }
             setData(arr)
+            setBackground(arr[0].background)
         })
     }, [])
-
-    const [counter, setCounter] = useState(true)
-    const [winsX, setWinsX] = useState(false)
-    const [winsO, setWinsO] = useState(false)
 
     const setXO = (xo, i) => {
         const valuesRef = ref(db, `tictactoe/field${i}/value`)
@@ -49,6 +48,7 @@ export default function Game() {
     }
 
     const winner = () => {
+        const valuesRef = ref(db, `tictactoe/field0/background`)
         if (data) {
             // / X wins
             if (
@@ -65,8 +65,7 @@ export default function Game() {
                 (data[2].value === "X" && data[4].value === "X" && data[6].value === "X")
             ) {
                 // console.log("XXX")
-                setWinsX(true)
-                setWinsO(false)
+                set(valuesRef, "game-red")
                 setCounter(true)
                 clearAll()
             }
@@ -85,8 +84,7 @@ export default function Game() {
                 (data[2].value === "O" && data[4].value === "O" && data[6].value === "O")
             ) {
                 // console.log("OOO")
-                setWinsX(false)
-                setWinsO(true)
+                set(valuesRef, "game-blue")
                 setCounter(false)
                 clearAll()
             }
@@ -94,7 +92,7 @@ export default function Game() {
     }
 
     return (
-        <div className={`game ${winsX ? "game-red" : ""} ${winsO ? "game-blue" : ""}`} onDoubleClickCapture={() => clearAll()}>
+        <div className={`game ${background}`} onDoubleClickCapture={() => clearAll()}>
             <div className="containerr">
                 <div className="game-inner">
 
