@@ -66,6 +66,7 @@ export default function Game() {
                 console.log("XXX")
                 const valuesRef = ref(db, `tictactoe/field0/background`)
                 set(valuesRef, "game-red")
+                console.log("Background - red")
                 setCounter(true)
                 clearAll()
             }
@@ -86,6 +87,7 @@ export default function Game() {
                 console.log("OOO")
                 const valuesRef = ref(db, `tictactoe/field0/background`)
                 set(valuesRef, "game-blue")
+                console.log("Background - blue")
                 setCounter(false)
                 clearAll()
             }
