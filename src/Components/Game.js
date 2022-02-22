@@ -10,7 +10,7 @@ import db from '../Firebase'
 
 export default function Game() {
     const [data, setData] = useState([])
-    const [counter, setCounter] = useState(true)
+    const [counter, setCounter] = useState()
     const [background, setBackground] = useState()
     useEffect(() => {
         const dataRef = ref(db, 'tictactoe')
@@ -22,6 +22,7 @@ export default function Game() {
             }
             setData(arr)
             setBackground(arr[0].background)
+            setCounter(arr[0].counter)
         })
     }, [])
 
@@ -48,7 +49,8 @@ export default function Game() {
     }
 
     const winner = () => {
-        const valuesRef = ref(db, `tictactoe/field0/background`)
+        const bgRef = ref(db, `tictactoe/field0/background`)
+        const counterRef = ref(db, `tictactoe/field0/counter`)
         if (data) {
             // / X wins
             if (
@@ -65,8 +67,8 @@ export default function Game() {
                 (data[2].value === "X" && data[4].value === "X" && data[6].value === "X")
             ) {
                 // console.log("XXX")
-                set(valuesRef, "game-red")
-                setCounter(true)
+                set(bgRef, "game-red")
+                set(counterRef, true)
                 clearAll()
             }
             // / O wins
@@ -84,8 +86,8 @@ export default function Game() {
                 (data[2].value === "O" && data[4].value === "O" && data[6].value === "O")
             ) {
                 // console.log("OOO")
-                set(valuesRef, "game-blue")
-                setCounter(false)
+                set(bgRef, "game-blue")
+                set(counterRef, false)
                 clearAll()
             }
         }
