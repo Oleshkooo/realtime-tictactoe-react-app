@@ -63,7 +63,7 @@ export default function Game() {
                 (data[0].value === "X" && data[4].value === "X" && data[8].value === "X") ||
                 (data[2].value === "X" && data[4].value === "X" && data[6].value === "X")
             ) {
-                // console.log("XXX")
+                console.log("XXX")
                 const valuesRef = ref(db, `tictactoe/field0/background`)
                 set(valuesRef, "game-red")
                 setCounter(true)
@@ -83,7 +83,7 @@ export default function Game() {
                 (data[0].value === "O" && data[4].value === "O" && data[8].value === "O") ||
                 (data[2].value === "O" && data[4].value === "O" && data[6].value === "O")
             ) {
-                // console.log("OOO")
+                console.log("OOO")
                 const valuesRef = ref(db, `tictactoe/field0/background`)
                 set(valuesRef, "game-blue")
                 setCounter(false)
